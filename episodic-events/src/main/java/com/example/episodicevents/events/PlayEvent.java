@@ -13,9 +13,8 @@ import java.time.LocalDateTime;
 public class PlayEvent extends Event{
     private PlayData data;
 
-    public PlayEvent( String id, Long userId, Long showId, Long episodeId, String createdAt, PlayData data) {
+    public PlayEvent(String id, Long userId, Long showId, Long episodeId, LocalDateTime createdAt, PlayData data) {
         super(id, userId, showId, episodeId, createdAt);
         this.data = data;
     }
-
 }

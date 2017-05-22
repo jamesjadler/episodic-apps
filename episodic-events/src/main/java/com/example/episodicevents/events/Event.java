@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({ "type" })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type",visible=true)
 @JsonSubTypes({
@@ -23,13 +24,11 @@ import java.time.LocalDateTime;
 
 })
 public class Event {
-    //private String type;
     @Id
     private String id;
     private Long userId;
     private Long showId;
     private Long episodeId;
-    private String createdAt;
-
+    private LocalDateTime createdAt;
 }
 
