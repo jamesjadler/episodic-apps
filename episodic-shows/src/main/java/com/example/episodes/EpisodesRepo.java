@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface EpisodesRepo extends CrudRepository<Episode,Long>{
     List<Episode> findByShowId(Long showId);
+    Episode findById(Long episodeId);
 
 }

@@ -39,8 +39,8 @@ public class ShowsController {
     }
 
 
-    @PostMapping("/{showId}/episodes")
-    public PostEpisodeResponse createEpisode(@RequestBody Episode episode, @PathVariable("showId") Long inputId) {
+    @PostMapping("/{id}/episodes")
+    public PostEpisodeResponse createEpisode(@RequestBody Episode episode, @PathVariable("id") Long inputId) {
         episode.setShowId(inputId);
         System.out.println("Attempting to save episode:"+episode);
         Episode savedEpisode = episodesRepo.save(episode);

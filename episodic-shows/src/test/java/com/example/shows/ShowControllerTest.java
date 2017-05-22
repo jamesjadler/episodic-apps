@@ -137,10 +137,9 @@ public class ShowControllerTest {
 
     @Test
     public void postEpisodeToShowByIdTest()throws Exception{
-        showsrepo.save(Show.builder()
+        Show expectedShow = showsrepo.save(Show.builder()
                 .name("show1")
                 .build());
-        Show expectedShow =showsrepo.findByName("show1");
         System.out.println("Expected Show: " +expectedShow);
         Long count = episodesRepo.count();
         Map<String, Object> payload = new HashMap<String, Object>() {
