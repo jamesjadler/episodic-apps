@@ -21,11 +21,9 @@ public class ShowsController {
     @Autowired
     EpisodesRepo episodesRepo;
 
-
     @PostMapping
     public Show createUser(@RequestBody Show show) {
         return showsRepo.save(show);
-
     }
 
     @GetMapping
@@ -37,7 +35,6 @@ public class ShowsController {
     public List<Episode> listEpisodesByShowId(@PathVariable("showId") Long inputId) {
         return (List<Episode>) episodesRepo.findByShowId(inputId);
     }
-
 
     @PostMapping("/{id}/episodes")
     public PostEpisodeResponse createEpisode(@RequestBody Episode episode, @PathVariable("id") Long inputId) {
@@ -51,6 +48,5 @@ public class ShowsController {
                 .title("S" + savedEpisode.getSeasonNumber() + " E" + savedEpisode.getEpisodeNumber())
                 .build();
     }
-
 
 }
