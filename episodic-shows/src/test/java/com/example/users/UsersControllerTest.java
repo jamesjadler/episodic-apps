@@ -213,7 +213,7 @@ public class UsersControllerTest {
         outputEpisodes.forEach(episode -> viewingsRepo.save(Viewing.builder()
                 .showId(expectedShow.getId())
                 .episodeId(episode.getId())
-                .timecode(1)
+                .timecode(1L)
                 .userId(user.getId())
                 .updatedAt(LocalDateTime.now())
                 .build())

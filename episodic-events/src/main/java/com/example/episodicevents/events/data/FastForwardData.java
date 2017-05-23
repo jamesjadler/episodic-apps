@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class FastForwardData {
     private Long startOffset;
     private Long endOffset;
-    private Long speed;
+    private Double speed;
 
 }

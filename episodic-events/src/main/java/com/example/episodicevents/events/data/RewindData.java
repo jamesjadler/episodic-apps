@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class RewindData {
     private Long startOffset;
     private Long endOffset;
-    private Long speed;
+    private Double speed;
 }
