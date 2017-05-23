@@ -2,13 +2,17 @@ package com.example.controllers;
 
 import com.example.episodes.Episode;
 import com.example.episodes.EpisodesRepo;
+import com.example.shows.ShowsRepo;
 import com.example.users.User;
 import com.example.users.UsersRepo;
+import com.example.viewings.RecentlyWatched;
 import com.example.viewings.Viewing;
 import com.example.viewings.ViewingsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -23,6 +27,9 @@ public class UsersController {
 
     @Autowired
     EpisodesRepo episodesRepo;
+
+    @Autowired
+    ShowsRepo showsRepo;
 
     @PostMapping
     public User createUser(@RequestBody User user) {
@@ -63,4 +70,20 @@ public class UsersController {
             }
         }
     }
+@GetMapping("/{id}/recently-watched")
+    public List<RecentlyWatched> getRecentViewings(@PathVariable("id")Long userId){
+    List<RecentlyWatched> recentlyWatchedList= new ArrayList<>();
+    List<Viewing> viewingList = viewingsRepo.findByUserIdOrderByUpdatedAt(userId);
+    System.out.println(viewingList);
+
+    viewingList.forEach(viewing -> recentlyWatchedList.add(RecentlyWatched.builder()
+            .episode(episodesRepo.findById(viewing.getEpisodeId()))
+            .show(showsRepo.findOne(viewing.getShowId()))
+            .timecode(viewing.getTimecode())
+            .updatedAt(viewing.getUpdatedAt())
+            .build()));
+    System.out.println(recentlyWatchedList);
+    return recentlyWatchedList;
+}
+
 }

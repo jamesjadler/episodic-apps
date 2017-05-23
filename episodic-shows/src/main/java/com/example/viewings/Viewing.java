@@ -25,5 +25,5 @@ public class Viewing {
     private Long episodeId;
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
-    private int timecode;
+    private Long timecode;
 }

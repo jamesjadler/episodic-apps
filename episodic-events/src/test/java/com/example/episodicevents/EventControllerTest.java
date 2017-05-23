@@ -78,57 +78,57 @@ public class EventControllerTest {
                 .andExpect(jsonPath("$.data.startOffset" ).doesNotExist());
         System.out.println(eventRepo.findAll());
     }
+//
+//    @Test
+//    public void testAllTypes() throws Exception{
+//        LocalDateTime dateTime = LocalDateTime.parse("2017-11-08T15:59:13.0091745");
+//        //PLAY
+//        PlayEvent playEvent = new PlayEvent(null,52L,987L,456L,
+//                dateTime,
+//                PlayData.builder()
+//                        .offset(0L)
+//                        .build()
+//        );
+//        call(playEvent,"play");
+//
+//        //PAUSE
+//
+//    }
 
-    @Test
-    public void testAllTypes() throws Exception{
-        LocalDateTime dateTime = LocalDateTime.parse("2017-11-08T15:59:13.0091745");
-        //PLAY
-        PlayEvent playEvent = new PlayEvent(null,52L,987L,456L,
-                dateTime,
-                PlayData.builder()
-                        .offset(0L)
-                        .build()
-        );
-        call(playEvent,"play");
-
-        //PAUSE
-
-    }
-
-    public void call(Event event,String expectedType) throws Exception{
-        String json = mapper.writeValueAsString(event);
-        System.out.println("INPUT JSON:\n" + json);
-        mapper.readValue(json, Event.class);
-
-        MockHttpServletRequestBuilder request = post("/")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
-        ResultMatcher expectation;
-        switch(expectedType){
-            case "play":
-                //expectation= jsonPath("$.data.offset" ).exists()&&jsonPath("$.data.startOffset" ).doesNotExist()
-                break;
-            case "pause":
-                break;
-            case "fastForward":
-                break;
-            case "progress":
-                break;
-            case "scrub":
-                break;
-            case "rewind":
-                break;
-        }
-
-        mvc.perform(request)
-                .andDo(print())
-                .andExpect(status().isOk())
-
-                .andExpect(jsonPath("$.type", equalTo(expectedType)))
-                .andExpect(jsonPath("$.data.offset" ).exists())
-                .andExpect(jsonPath("$.data.startOffset" ).doesNotExist());
-        System.out.println(eventRepo.findAll());
-    }
+//    public void call(Event event,String expectedType) throws Exception{
+//        String json = mapper.writeValueAsString(event);
+//        System.out.println("INPUT JSON:\n" + json);
+//        mapper.readValue(json, Event.class);
+//
+//        MockHttpServletRequestBuilder request = post("/")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .accept(MediaType.APPLICATION_JSON)
+//                .content(json);
+//        ResultMatcher expectation;
+//        switch(expectedType){
+//            case "play":
+//                //expectation= jsonPath("$.data.offset" ).exists() && jsonPath("$.data.startOffset" ).doesNotExist();
+//                break;
+//            case "pause":
+//                break;
+//            case "fastForward":
+//                break;
+//            case "progress":
+//                break;
+//            case "scrub":
+//                break;
+//            case "rewind":
+//                break;
+//        }
+//
+//        mvc.perform(request)
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//
+//                .andExpect(jsonPath("$.type", equalTo(expectedType)))
+//                .andExpect(jsonPath("$.data.offset" ).exists())
+//                .andExpect(jsonPath("$.data.startOffset" ).doesNotExist());
+//        System.out.println(eventRepo.findAll());
+//    }
     //Get Recent 20
 }
