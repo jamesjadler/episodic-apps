@@ -31,7 +31,6 @@ public class AmqpPublisher {
         return BindingBuilder.bind(queue()).to(appExchange()).with("my-routing-key");
     }
 
-
     @Bean
     public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);

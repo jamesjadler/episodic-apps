@@ -1,0 +1,11 @@
+applications:
+- name: episodic-gateway
+  instances: 1
+  memory: 512M
+  disk_quota: 1024M
+  routes:
+  - route: episodic-gateway-pseudisodomic-succedaneum.cfapps.io
+  stack: cflinuxfs2
+  services:
+  - config-server
+  - service-registry

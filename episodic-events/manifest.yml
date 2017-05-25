@@ -7,5 +7,7 @@ applications:
   - route: episodic-events-uncheerable-terra.cfapps.io
   services:
   - episodic-events-db
+  - service-registry
+  - config-server
   stack: cflinuxfs2
   path: "./build/libs/episodic-events-0.0.1-SNAPSHOT.jar"
