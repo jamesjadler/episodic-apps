@@ -1,7 +1,10 @@
 package com.example.episodicevents;
 
 import com.example.episodicevents.events.Event;
+import com.example.episodicevents.events.ProgressEvent;
 import com.example.episodicevents.events.data.MongoEventRepo;
+import com.example.episodicevents.events.rabbit.ProgressPublisher;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +19,22 @@ public class EventController {
     @Autowired
     MongoEventRepo eventRepo;
 
+    @Autowired
+    ProgressPublisher progressPublisher;
+
     @PostMapping("/")
     public Event postEvent(@RequestBody Event inputEvent) {
         Event event = inputEvent;
+
+
         System.out.println("CONTROLLER:" + event);
         Event eventResponse = eventRepo.save(event);
         System.out.println("SAVED RESPONSE:" + eventResponse);
+        if(inputEvent instanceof ProgressEvent){
+            progressPublisher.process((ProgressEvent)inputEvent);
+        }
+
+
         return eventResponse;
     }
 

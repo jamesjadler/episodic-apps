@@ -30,5 +30,7 @@ public class Event {
     private Long showId;
     private Long episodeId;
     private LocalDateTime createdAt;
+
+
 }
 

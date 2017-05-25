@@ -6,6 +6,7 @@ import com.example.shows.ShowsRepo;
 import com.example.users.User;
 import com.example.users.UsersRepo;
 import com.example.viewings.RecentlyWatched;
+import com.example.viewings.UpdateOrCreateViewing;
 import com.example.viewings.Viewing;
 import com.example.viewings.ViewingsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,14 @@ public class UsersController {
 
     @Autowired
     UsersRepo usersRepo;
-
     @Autowired
     ViewingsRepo viewingsRepo;
-
     @Autowired
     EpisodesRepo episodesRepo;
-
     @Autowired
     ShowsRepo showsRepo;
+    @Autowired
+    UpdateOrCreateViewing updateOrCreateViewing;
 
     @PostMapping
     public User createUser(@RequestBody User user) {
@@ -43,32 +43,9 @@ public class UsersController {
 
     @PatchMapping("/{id}/viewings")
     public void updateViewing(@RequestBody Viewing viewing, @PathVariable("id") Long userId) {
-        System.out.println("INPUTS: VIEWING:" + viewing + " ID:" + userId);
-        Viewing foundViewing = viewingsRepo.findByUserId(userId);
-        Episode foundEpisode = episodesRepo.findById(viewing.getEpisodeId());
-        Viewing patch = viewing;
-        if (foundViewing != null) {
-            if (foundEpisode != null) {
-                System.out.println("FOUND PATCH TARGET: " + foundViewing);
-                patch.setId(foundViewing.getId());
-                patch.setUserId(userId);
-                patch.setShowId(foundEpisode.getShowId());
-                System.out.println("REPLACING PATCH TARGET WITH: " + patch);
-                viewingsRepo.save(patch);
-            } else{
-                System.out.println("FOUND VIEWING BUT NO VALID EPISODE FOUND");
-            }
-        } else {
-            System.out.println("NO PATCH TARGET FOUND: ");
-            if (foundEpisode != null) {
-                patch.setUserId(userId);
-                patch.setShowId(foundEpisode.getShowId());
-                System.out.println("CREATING VIEWING WITH: " + patch);
-                viewingsRepo.save(patch);
-            } else {
-                System.out.println(" NO VIEWING FOUND AND NO MATCHING EPISODE FOUND");
-            }
-        }
+        updateOrCreateViewing.process(viewing,userId);
+
+
     }
 @GetMapping("/{id}/recently-watched")
     public List<RecentlyWatched> getRecentViewings(@PathVariable("id")Long userId){
