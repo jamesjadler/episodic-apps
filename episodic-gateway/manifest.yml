@@ -9,3 +9,4 @@ applications:
   services:
   - config-server
   - service-registry
+  path: ./build/libs/episodic-gateway-0.0.1-SNAPSHOT.jar
