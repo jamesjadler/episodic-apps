@@ -36,6 +36,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.springframework.boot:spring-boot-starter-amqp")
+	compile('io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry')
 
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.0.pr3')
 	compile('org.flywaydb:flyway-core')
